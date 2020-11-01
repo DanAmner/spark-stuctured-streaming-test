@@ -4,26 +4,24 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.8
-    - name: Install dependencies
-      run: |
-        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-        source $HOME/.poetry/env
-        poetry install
-    - name: Analysing the code
-      run: |
-        black --line-length=180 --check .
-        mypy --ignore-missing-imports .
-        flake8 --max-line-length=180 .
-    - name: Run tests
-      run: |
-        coverage run --include pipeline/*.py  -m unittest discover -s ./tests -p test_*.py
-        coverage report
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install  --no-root -v
+      - name: Analysing the code
+        run: |
+          black --line-length=180 --check .
+          mypy --ignore-missing-imports .
+          flake8 --max-line-length=180 .
+      - name: Run tests
+        run: |
+          coverage run --include pipeline/*.py  -m unittest discover -s ./tests -p test_*.py
+          coverage report
