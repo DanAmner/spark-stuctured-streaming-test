@@ -25,5 +25,5 @@ jobs:
           poetry run flake8 --max-line-length=180 .
       - name: Run tests
         run: |
-          poetry run coverage run --include pipeline/*.py  -m unittest discover -s ./tests -p test_*.py
+          poetry run coverage run --source=pipeline  -m unittest discover -s ./tests -p test_*.py
           poetry run coverage report
