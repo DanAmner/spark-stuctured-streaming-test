@@ -16,9 +16,9 @@ class Test(unittest.TestCase):
         stream.processAllAvailable()
         stream.stop()
 
-        self.assertEquals(2, spark.sql("SELECT COUNT(1) AS count FROM example").first()["count"])
-        self.assertEquals(1, spark.sql("SELECT COUNT(1) AS count FROM example WHERE name = 'a'").first()["count"])
-        self.assertEquals(1, spark.sql("SELECT COUNT(1) AS count FROM example WHERE name = 'b'").first()["count"])
+        self.assertEqual(2, spark.sql("SELECT COUNT(1) AS count FROM example").first()["count"])
+        self.assertEqual(1, spark.sql("SELECT COUNT(1) AS count FROM example WHERE name = 'a'").first()["count"])
+        self.assertEqual(1, spark.sql("SELECT COUNT(1) AS count FROM example WHERE name = 'b'").first()["count"])
 
 
 def _spark() -> SparkSession:
