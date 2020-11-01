@@ -20,9 +20,10 @@ jobs:
           poetry install  --no-root -v
       - name: Analysing the code
         run: |
-          mypy --ignore-missing-imports .
-          flake8 --max-line-length=180 .
+          poetry run black --line-length=180 --check .
+          poetry run mypy --ignore-missing-imports .
+          poetry run flake8 --max-line-length=180 .
       - name: Run tests
         run: |
-          coverage run --include pipeline/*.py  -m unittest discover -s ./tests -p test_*.py
-          coverage report
+          poetry run coverage run --include pipeline/*.py  -m unittest discover -s ./tests -p test_*.py
+          poetry run coverage report
