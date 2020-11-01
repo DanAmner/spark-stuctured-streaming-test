@@ -18,10 +18,8 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install  --no-root -v
-          poetry shell
       - name: Analysing the code
         run: |
-          black --line-length=180 --check .
           mypy --ignore-missing-imports .
           flake8 --max-line-length=180 .
       - name: Run tests
