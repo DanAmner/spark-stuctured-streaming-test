@@ -12,9 +12,11 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      - name: Install dependencies
+      - name: Install poetry
         run: |
           pip install poetry
+      - name: Install dependencies
+        run: |
           poetry install  --no-root -v
       - name: Analysing the code
         run: |
